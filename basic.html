@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript basics</title>
+</head>
+
+<body>
+    <h1>Javascript basics</h1>
+    <ul>
+        <li>Spring</li>
+        <li>Summer</li>
+        <li>Fall</li>
+        <li>Winter</li>
+    </ul>
+    <script>
+
+        this.name = "Window"
+        console.log(this)
+        this.place = "Global context"
+
+        function gretting(g, who){
+            console.log(`${g} ${who} from ${this.place}`)
+        }
+
+        gretting("Hello", "Kenai")
+
+        const obj = {
+            place: "Object context"
+        }
+
+        gretting.call(obj, "HI", "Jon") //object context
+        gretting.call(null, "HI", "Jon") //global context
+        gretting.call(this, "HI", "Jon") //global context
+        gretting.apply(obj, ["BYE", "Mircha"])
+
+        const guy = {
+            name: "Jon",
+            gretting: function () {
+                console.log(`Hi ${this.name}`)
+            }
+        }
+
+        guy.gretting()
+
+        const anotherGuy = {
+            //link the context
+            gretting: guy.gretting.bind(guy)
+        }
+
+        anotherGuy.gretting()
+    </script>
+</body>
+
+</html>
